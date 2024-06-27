@@ -1,0 +1,101 @@
+
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    {{>menu}}
+    <div class="layout-page">
+      {{>header}}
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Bordered Table -->
+          <div class="card">
+            <div class="card-header">
+                <div class="d-sm-flex justify-content-between align-items-start">
+                    <h4 class="fw-bold"><span class="text-muted fw-light">Management /</span> Posts/Edit Banner</h4>
+
+                    
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                    <h5 class="card-header">Edit Selected Banner</h5>
+                    <div class="card-body">
+                        <form method="POST" id="updateBannerForm" action="/banners/update/{{banner.id}}" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Article Link</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="bannerLink"
+                                    name="bannerLink"
+                                    placeholder="Enter Article Link"
+                                    value="{{banner.bannerLink}}"
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Current Image</label>
+                                <div class="d-flex align-items-center mb-2">
+                                    <img id="currentImage" src="{{banner.imgLink}}" alt="Current Image" style="max-width: 200px; margin-top: 10px;">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newImage" class="form-label">New Image</label>
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    id="image"
+                                    name="image"
+                                    accept="image/*"
+                                    onchange="previewNewImage(this)"
+                                />
+                                <img id="newImagePreview" src="#" alt="Preview" style="display:none; max-width: 200px; margin-top: 10px;" />
+                                <button type="button" onclick="resetNewImage()" class="btn btn-secondary" id="resetNewImageButton" style="display:none;">Choose Another Image</button>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            
+            
+            
+            </div>
+          <!--/ Bordered Table -->
+        </div>
+        
+        <!-- / Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+    function previewNewImage(input) {
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var preview = document.getElementById("newImagePreview");
+            preview.src = e.target.result;
+            preview.style.display = "block";
+            document.getElementById("resetNewImageButton").style.display = "block";
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function resetNewImage() {
+        document.getElementById("image").value = "";
+        document.getElementById("newImagePreview").src = "#";
+        document.getElementById("newImagePreview").style.display = "none";
+        document.getElementById("resetNewImageButton").style.display = "none";
+    }
+</script>
+
+<script>
+  new DataTable('#myTable');
+</script>

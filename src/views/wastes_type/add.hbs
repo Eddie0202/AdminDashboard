@@ -1,0 +1,110 @@
+
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    {{>menu}}
+    <div class="layout-page">
+      {{>header}}
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Bordered Table -->
+          <div class="card">
+            <div class="card-header">
+                <div class="d-sm-flex justify-content-between align-items-start">
+                    <h4 class="fw-bold"><span class="text-muted fw-light">Management /</span> Posts/Add new waste type</h4>
+
+                    
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                    <h5 class="card-header">Create New Waste Type Here</h5>
+                    <div class="card-body">
+                        <form method="POST" id="createWasteTypeForm" action="/waste-type/add" enctype="multipart/form-data">
+                          <div class="mb-3">
+                              <label for="title" class="form-label">Waste Type Name</label>
+                              <input
+                                  type="text"
+                                  class="form-control"
+                                  id="name"
+                                  name="name"
+                                  placeholder="Enter Waste Type Name"
+                              />
+                          </div>
+                          <div class="mb-3">
+                              <label for="image" class="form-label">Image</label>
+                              <input
+                                  type="file"
+                                  class="form-control"
+                                  id="image"
+                                  name="image"
+                                  accept="image/*"
+                                  onchange="previewImage(this)"
+                              />
+                              <img id="imagePreview" src="#" alt="Preview" style="display:none; max-width: 200px; margin-top: 10px;" />
+                              <button type="button" onclick="resetImage()" class="btn btn-secondary btn-success" id="resetImageButton" style="display:none;">Choose Another Image</button>
+                          </div>
+                          <div class="mb-3">
+                                <textarea class="form-control my-editor" id="content" name="content" rows="3"></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Create Post</button>
+                      </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            
+            
+            
+            </div>
+          <!--/ Bordered Table -->
+        </div>
+        
+        <!-- / Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function previewImage(input) {
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var preview = document.getElementById("imagePreview");
+            preview.src = e.target.result;
+            preview.style.display = "block";
+            document.getElementById("resetImageButton").style.display = "block";
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function resetImage() {
+        document.getElementById("image").value = "";
+        document.getElementById("imagePreview").src = "#";
+        document.getElementById("imagePreview").style.display = "none";
+        document.getElementById("resetImageButton").style.display = "none";
+    }
+</script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
+
+<script>
+  new DataTable('#myTable');
+</script>

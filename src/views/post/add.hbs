@@ -1,0 +1,80 @@
+
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    {{>menu}}
+    <div class="layout-page">
+      {{>header}}
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Bordered Table -->
+          <div class="card">
+            <div class="card-header">
+                <div class="d-sm-flex justify-content-between align-items-start">
+                    <h4 class="fw-bold"><span class="text-muted fw-light">Management /</span> Posts/Add new post</h4>
+
+                    
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                    <h5 class="card-header">Create New Post Here</h5>
+                    <div class="card-body">
+                        <form method="POST" id="createPostForm" action="/posts/add" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            placeholder="Enter Title Post"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="shortDescription" name="shortDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postLink" class="form-label">Post Link</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="postLink"
+                            name="postLink"
+                            placeholder="Enter Post Link"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input
+                            type="file"
+                            class="form-control"
+                            id="image"
+                            name="image"
+                            accept="image/*"
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Post</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            
+            
+            
+            </div>
+          <!--/ Bordered Table -->
+        </div>
+        
+        <!-- / Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  new DataTable('#myTable');
+</script>

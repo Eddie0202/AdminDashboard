@@ -1,0 +1,25 @@
+.post-image {
+    width: 150px;
+    height: 150px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.hidden-content {
+    display: none;
+}
+
+.hidden-content.show {
+    display: block;
+  }
+
+.shorten-link {
+    display: block;
+    width: 100px; /* Độ rộng của cột */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

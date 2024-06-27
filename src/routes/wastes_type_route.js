@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const wastesTypeController = require("../controllers/wastes_type_controller");
+router.get('/', wastesTypeController.getWasteTypes);
+router.get('/add', wastesTypeController.createWasteTypeIndex);
+router.post('/add', wastesTypeController.addNewWasteType);
+router.get('/update/:id', wastesTypeController.getWasteTypeById);
+router.post('/update/:id', wastesTypeController.updateWasteType);
+router.delete('/:id', wastesTypeController.delete);
+module.exports = router;

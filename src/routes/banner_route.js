@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const bannerController = require("../controllers/banner_controller");
+router.get('/', bannerController.getBanners);
+router.get('/add', bannerController.createBanners);
+router.post('/add', bannerController.addNewBanner);
+router.get('/update/:id', bannerController.getBannerByID);
+router.post('/update/:id', bannerController.updateBanner);
+router.delete('/:id', bannerController.delete);
+module.exports = router;

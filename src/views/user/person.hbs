@@ -1,0 +1,104 @@
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    {{>menu}}
+    <div class="layout-page">
+      {{>header}}
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Bordered Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="d-sm-flex justify-content-between align-items-start">
+                <h4 class="fw-bold"><span class="text-muted fw-light">Management /</span> Users/Person</h4>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="myTable" class="table table-bordered table-responsive">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Create At</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each users}}
+                  <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{name}}</td>
+                    <td>{{email}}</td> 
+                    <td>{{phonenumber}}</td>
+                    <td>{{address}}</td>
+                    <td>{{role}}</td>
+                    <td>
+                      <span class="{{setStatusClass status}}">{{status}}</span>
+                    </td>
+                    <td>{{createdAt}}</td>
+                    <td>
+                      <a class="btn btn-success delete-post-button" data-bs-toggle="modal" data-bs-target="#modalTop" data-id="{{uid}}"  data-action="{{status}}">
+                        <i class=""></i> Change Status
+                      </a>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--/ Bordered Table -->
+        </div>
+        <!-- / Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+                        <!-- Modal Confirm-->
+                        <div class="modal modal-top fade" id="modalTop" tabindex="-1">
+                          <div class="modal-dialog">
+                            <form class="modal-content" id="deleteForm" method="POST" action="">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalTopTitle">Change User Status?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameSlideTop" class="form-label">Are you sure you want to process?</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">NO</button>
+                                <button type="submit" class="btn btn-danger">YES</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+
+<script>
+  // JavaScript to update action URL when the Delete button is clicked
+  document.addEventListener('DOMContentLoaded', function () {
+  const deleteButtons = document.querySelectorAll('.delete-post-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const uidPerson = this.getAttribute('data-id');
+      const action = this.getAttribute('data-action');
+      const form = document.getElementById('deleteForm');
+      form.action = `/users/person/${uidPerson}/${action}`; // Sử dụng template literals với backticks
+    });
+  });
+});
+
+</script>
+
+<script>
+  new DataTable('#myTable');
+</script>

@@ -1,0 +1,67 @@
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    {{>menu}}
+    <div class="layout-page">
+      {{>header}}
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Bordered Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="d-sm-flex justify-content-between align-items-start">
+                <h4 class="fw-bold"><span class="text-muted fw-light">Management /</span> Waste data</h4>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="myTable" class="table table-bordered table-responsive">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Person</th>
+                    <th>Collector</th>
+                    <th>Waste Type</th>
+                    <th>Fee</th>
+                    <th>Weigh</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Created At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each waste}}
+                  <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{personName}}</td> 
+                    <td>{{collectionName}}</td>
+                    <td>{{wasteType}}</td>
+                    <td>{{fee}}</td>
+                    <td>{{weigh}}</td>
+                    <td>{{status}}</td>
+                    <td>
+                      <a href="{{ggMapLink}}" target="_blank">
+                      <span class="avatar-initial rounded bg-label-info"><i class="bx bx-map"></i></span>
+                      </a>
+                    </td>
+                    <td>{{createdAt}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--/ Bordered Table -->
+        </div>
+        <!-- / Content -->
+      </div>
+    </div>
+  </div>
+</div>
+
+                        
+
+
+
+<script>
+  new DataTable('#myTable');
+</script>
